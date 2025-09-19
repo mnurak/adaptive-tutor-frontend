@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth.js';
+import { useAuth } from '../../hooks/useAuth.js'; // <-- ADD THIS LINE
 import styles from './Header.module.css';
 
 const Header = () => {
-  const { isAuthenticated, logout } = useAuth();
+  // This line was causing the error because `useAuth` was not defined.
+  // Now that it's imported, it will work correctly.
+  const { isAuthenticated, logout } = useAuth(); 
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -23,7 +25,7 @@ const Header = () => {
             <>
               <NavLink to="/" className={({ isActive }) => (isActive ? styles.active : '')}>Dashboard</NavLink>
               <NavLink to="/profile" className={({ isActive }) => (isActive ? styles.active : '')}>Profile</NavLink>
-              <NavLink to="/lesson" className={({ isActive }) => (isActive ? styles.active : '')}>Lesson</NavLink>
+              <NavLink to="/chat" className={({ isActive }) => (isActive ? styles.active : '')}>Chat</NavLink>
               <button onClick={handleLogout} className={styles.logoutButton}>Logout</button>
             </>
           ) : (
@@ -37,4 +39,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;

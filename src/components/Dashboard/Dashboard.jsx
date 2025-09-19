@@ -13,13 +13,14 @@ const Dashboard = () => {
       <div className={styles.cardContainer}>
         <div className={styles.card}>
           <h3>🧠 Your Profile</h3>
-          <p>Review and dynamically update your cognitive learning profile based on your feedback.</p>
+          <p>Review your cognitive learning profile, which adapts as you chat with the tutor.</p>
           <Link to="/profile" className={styles.ctaButton}>Go to Profile</Link>
         </div>
         <div className={styles.card}>
-          <h3>📚 Generate a Lesson</h3>
-          <p>Enter a concept you want to learn and get a lesson personalized just for you.</p>
-          <Link to="/lesson" className={styles.ctaButton}>Start Learning</Link>
+          {/* Update this card to point to the new chat feature */}
+          <h3>💬 Chat with your Tutor</h3>
+          <p>Start a conversation with your personal AI tutor to learn any concept adaptively.</p>
+          <Link to="/chat" className={styles.ctaButton}>Start Chatting</Link>
         </div>
       </div>
     </div>

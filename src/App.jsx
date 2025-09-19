@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './components/Auth/Login.jsx';
 import Register from './components/Auth/Register.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
-import Lesson from './components/Lesson/Lesson.jsx';
+import Chat from './components/Chat/Chat.jsx'; // Import Chat instead of Lesson
 import Profile from './components/Profile/Profile.jsx';
 import ProtectedRoute from './components/Common/ProtectedRoute.jsx';
 import Header from './components/Layout/Header.jsx';
@@ -18,7 +18,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="/lesson" element={<ProtectedRoute><Lesson /></ProtectedRoute>} />
+          {/* Replace /lesson route with /chat */}
+          <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} /> 
         </Routes>
       </main>
     </div>
