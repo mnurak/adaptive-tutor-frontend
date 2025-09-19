@@ -1,0 +1,43 @@
+.dashboard h1 {
+  margin-bottom: 0.5rem;
+}
+.dashboard p {
+  color: var(--light-text-color);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background-color: var(--background-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+}
+.card h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+.card p {
+  font-size: 1rem;
+  flex-grow: 1;
+}
+.ctaButton {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+.ctaButton:hover {
+  background-color: var(--primary-hover-color);
+}

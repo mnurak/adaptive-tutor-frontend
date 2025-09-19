@@ -1,0 +1,19 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main.container {
+  flex-grow: 1;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.code-block {
+  background-color: #f0f2f5;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  font-family: 'Courier New', Courier, monospace;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
