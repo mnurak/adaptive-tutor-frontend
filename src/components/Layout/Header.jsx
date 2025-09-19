@@ -1,12 +1,10 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth.js'; // <-- ADD THIS LINE
+import { useAuth } from '../../hooks/useAuth.js';
 import styles from './Header.module.css';
 
 const Header = () => {
-  // This line was causing the error because `useAuth` was not defined.
-  // Now that it's imported, it will work correctly.
-  const { isAuthenticated, logout } = useAuth(); 
+  const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -24,12 +22,14 @@ const Header = () => {
           {isAuthenticated ? (
             <>
               <NavLink to="/" className={({ isActive }) => (isActive ? styles.active : '')}>Dashboard</NavLink>
-              <NavLink to="/profile" className={({ isActive }) => (isActive ? styles.active : '')}>Profile</NavLink>
               <NavLink to="/chat" className={({ isActive }) => (isActive ? styles.active : '')}>Chat</NavLink>
+              <NavLink to="/lesson" className={({ isActive }) => (isActive ? styles.active : '')}>Lesson</NavLink>
+              <NavLink to="/profile" className={({ isActive }) => (isActive ? styles.active : '')}>Profile</NavLink>
               <button onClick={handleLogout} className={styles.logoutButton}>Logout</button>
             </>
           ) : (
             <>
+              {/* THIS IS THE CORRECTED PART FOR LOGGED-OUT USERS */}
               <NavLink to="/login" className={({ isActive }) => (isActive ? styles.active : '')}>Login</NavLink>
               <NavLink to="/register" className={({ isActive }) => (isActive ? styles.active : '')}>Register</NavLink>
             </>

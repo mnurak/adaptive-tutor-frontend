@@ -11,14 +11,19 @@ const Lesson = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const generateLesson = async (e) => {
+  const handleGenerateLesson = async (e) => {
     e.preventDefault();
-    if (!concept) return;
+    if (!concept.trim()) return;
+
     setLoading(true);
     setError('');
     setLessonContent('');
+
     try {
-      const response = await api.post(`/api/v1/instruction/${concept}/generate`);
+      // Call the new, dedicated endpoint
+      const response = await api.post(`/api/v1/instruction/generate`, {
+        concept_name: concept
+      });
       setLessonContent(response.data.generated_instruction);
     } catch (err) {
       setError(`Failed to generate lesson for "${concept}". Please try another concept.`);
@@ -29,26 +34,31 @@ const Lesson = () => {
 
   return (
     <div className={styles.lessonContainer}>
-      <h2>Personalized Lesson Generator</h2>
-      <form onSubmit={generateLesson} className={styles.form}>
+      <h2>Structured Lesson Generator</h2>
+      <p>Enter a topic to get a complete, structured lesson based on your current learning profile.</p>
+      
+      <form onSubmit={handleGenerateLesson} className={styles.form}>
         <input
           type="text"
           value={concept}
           onChange={(e) => setConcept(e.target.value)}
-          placeholder="e.g., Arrays, Recursion, CSS Flexbox"
+          placeholder="e.g., Recursion, CSS Flexbox"
           required
         />
-        <button type="submit" disabled={loading || !concept}>
+        <button type="submit" disabled={loading || !concept.trim()}>
           Generate Lesson
         </button>
       </form>
+
       {loading && (
         <div className={styles.loadingContainer}>
-          <Loader />
-          <p>Generating your lesson on "{concept}"...</p>
+            <Loader />
+            <p>Generating your lesson on "{concept}"...</p>
         </div>
       )}
+      
       {error && <p className={styles.error}>{error}</p>}
+      
       {lessonContent && (
         <div className={styles.lessonContent}>
           <h3>Lesson on: {concept}</h3>
@@ -70,4 +80,5 @@ const Lesson = () => {
     </div>
   );
 };
+
 export default Lesson;
