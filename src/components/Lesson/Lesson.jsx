@@ -20,13 +20,14 @@ const Lesson = () => {
     setLessonContent('');
 
     try {
-      // Call the new, dedicated endpoint
-      const response = await api.post(`/api/v1/instruction/generate`, {
-        concept_name: concept
-      });
+      // THIS IS THE FIX: The concept name is now correctly placed in the URL path,
+      // and the request body is empty as per the backend's expectation.
+      const response = await api.post(`/api/v1/instruction/${concept}/generate`, {});
+      
       setLessonContent(response.data.generated_instruction);
     } catch (err) {
-      setError(`Failed to generate lesson for "${concept}". Please try another concept.`);
+      const errorDetail = err.response?.data?.detail || `Failed to generate lesson for "${concept}".`;
+      setError(errorDetail);
     } finally {
       setLoading(false);
     }
@@ -42,7 +43,7 @@ const Lesson = () => {
           type="text"
           value={concept}
           onChange={(e) => setConcept(e.target.value)}
-          placeholder="e.g., Recursion, CSS Flexbox"
+          placeholder="e.g., Arrays, Recursion"
           required
         />
         <button type="submit" disabled={loading || !concept.trim()}>
