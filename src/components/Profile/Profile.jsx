@@ -17,7 +17,7 @@ const Profile = () => {
     setLoading(true);
     setMessage('');
     try {
-      const response = await api.post('/api/v1/student/me/analyze', { prompt });
+      const response = await api.post('/api/v1/student/me/analyze/preview', { prompt });
       setUser((prevUser) => ({ ...prevUser, cognitive_profile: response.data }));
       setMessage('Success! Your profile has been updated.');
       setMessageType('success');

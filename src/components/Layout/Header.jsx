@@ -16,8 +16,8 @@ const Header = () => {
     <header className={styles.header}>
       <div className={`${styles.headerContent} container`}>
         <NavLink to="/" className={styles.logo}>
-          🎓 Adaptive Tutor
-        </NavLink>
+    <img src="/adaptilearn.jpg" alt="Adaptive Tutor Logo" className={styles.logoImage} /> Adaptive Tutor
+  </NavLink>
         <nav>
           {isAuthenticated ? (
             <>

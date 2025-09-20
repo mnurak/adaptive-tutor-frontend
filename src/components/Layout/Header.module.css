@@ -47,3 +47,11 @@
   background-color: var(--primary-color);
   color: white;
 }
+
+.logoImage {
+  width: 50px; /* Set the size of the image */
+  height: 50px; /* Set the size of the image */
+  border-radius: 50%; /* Makes the image round */
+  object-fit: cover; /* Ensures the image fits well inside the circular border */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a bottom shadow */
+}
