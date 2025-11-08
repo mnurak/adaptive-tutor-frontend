@@ -1,0 +1,142 @@
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.questionNumber {
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.questionText {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.inputContainer {
+  margin-top: 2rem;
+}
+
+/* Multiple Choice */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.option {
+  padding: 1rem 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.option:hover {
+  border-color: #1976d2;
+  background-color: #f5f9ff;
+}
+
+.option.selected {
+  border-color: #1976d2;
+  background-color: #e3f2fd;
+  font-weight: 500;
+}
+
+/* Scale */
+.scaleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scaleLabels {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.scale {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.scaleButton {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  background: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.scaleButton:hover {
+  border-color: #1976d2;
+  background-color: #f5f9ff;
+}
+
+.scaleButton.selected {
+  border-color: #1976d2;
+  background-color: #1976d2;
+  color: white;
+}
+
+/* Text Input */
+.textInput {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .questionText {
+    font-size: 1.25rem;
+  }
+
+  .scale {
+    gap: 0.5rem;
+  }
+
+  .scaleButton {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+}
+

@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import api from '../../api/api.js';
 import Mermaid from './Mermaid.jsx';
 import Loader from '../Common/Loader.jsx';
+import { useSessionTracking } from '../../hooks/useSessionTracking.js';
 import styles from './Lesson.module.css';
 
 const Lesson = () => {
@@ -10,6 +11,7 @@ const Lesson = () => {
   const [lessonContent, setLessonContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const { sessionId, trackResourceInteraction, addConceptCovered } = useSessionTracking('lesson');
 
   const handleGenerateLesson = async (e) => {
     e.preventDefault();
@@ -18,13 +20,31 @@ const Lesson = () => {
     setLoading(true);
     setError('');
     setLessonContent('');
+    const startTime = Date.now();
 
     try {
       // THIS IS THE FIX: The concept name is now correctly placed in the URL path,
       // and the request body is empty as per the backend's expectation.
       const response = await api.post(`/api/v1/instruction/${concept}/generate`, {});
-      
+
       setLessonContent(response.data.generated_instruction);
+
+      // Track concept covered
+      addConceptCovered(concept);
+
+      // Track interaction
+      if (sessionId) {
+        const timeSpent = (Date.now() - startTime) / 1000;
+        trackResourceInteraction({
+          resource_id: `lesson-${concept}`,
+          resource_type: 'article',
+          interaction_type: 'view',
+          time_spent_seconds: timeSpent,
+          completion_percentage: 1.0,
+          engagement_score: 5,
+          text_scroll_depth: 1.0
+        });
+      }
     } catch (err) {
       const errorDetail = err.response?.data?.detail || `Failed to generate lesson for "${concept}".`;
       setError(errorDetail);

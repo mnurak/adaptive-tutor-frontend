@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import api from '../../api/api.js';
 import Mermaid from '../Lesson/Mermaid.jsx'; // We can reuse this
 import Loader from '../Common/Loader.jsx';
+import { useSessionTracking } from '../../hooks/useSessionTracking.js';
 import styles from './Chat.module.css';
 
 const Chat = () => {
@@ -12,6 +13,7 @@ const Chat = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const chatEndRef = useRef(null);
+  const { sessionId, trackResourceInteraction, addConceptCovered } = useSessionTracking('chat');
 
   // Auto-scroll to the latest message
   useEffect(() => {
@@ -24,6 +26,7 @@ const Chat = () => {
 
     const userMessage = { role: 'user', content: inputValue };
     const conversationHistory = [...messages]; // History before the new message
+    const startTime = Date.now();
 
     setMessages(prevMessages => [...prevMessages, userMessage]);
     setInputValue('');
@@ -37,6 +40,19 @@ const Chat = () => {
 
       const assistantMessage = { role: 'assistant', content: response.data.generated_response };
       setMessages(prevMessages => [...prevMessages, assistantMessage]);
+
+      // Track interaction
+      if (sessionId) {
+        const timeSpent = (Date.now() - startTime) / 1000;
+        trackResourceInteraction({
+          resource_id: 'chat-conversation',
+          resource_type: 'chat',
+          interaction_type: 'message',
+          time_spent_seconds: timeSpent,
+          completion_percentage: 1.0,
+          engagement_score: 4
+        });
+      }
     } catch (error) {
       console.error("Failed to get response:", error);
       const errorMessage = { role: 'assistant', content: "Sorry, I encountered an error. Please try again." };

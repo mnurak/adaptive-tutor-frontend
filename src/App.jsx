@@ -6,6 +6,8 @@ import Dashboard from './components/Dashboard/Dashboard.jsx';
 import Chat from './components/Chat/Chat.jsx';
 import Lesson from './components/Lesson/Lesson.jsx';
 import Profile from './components/Profile/Profile.jsx';
+import OnboardingWizard from './components/Onboarding/OnboardingWizard.jsx';
+import AnalyticsDashboard from './components/Analytics/AnalyticsDashboard.jsx';
 import ProtectedRoute from './components/Common/ProtectedRoute.jsx';
 import Header from './components/Layout/Header.jsx';
 
@@ -22,7 +24,9 @@ function App() {
           {/* Protected Routes */}
           {/* THIS IS THE FIX: Ensure this route for the root path exists. */}
           <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/onboarding" element={<ProtectedRoute><OnboardingWizard /></ProtectedRoute>} />
+          <Route path="/analytics" element={<ProtectedRoute><AnalyticsDashboard /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
           <Route path="/lesson" element={<ProtectedRoute><Lesson /></ProtectedRoute>} />
